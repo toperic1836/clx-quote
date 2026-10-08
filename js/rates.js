@@ -98,8 +98,28 @@
     "膀胱懸吊術", "KELLY手術", "尿道人工擴約肌植入術", "（後）腹腔鏡膀胱頸懸吊術", "從腹腔進入陰道固定術",
     "從陰道進入之陰道固定術", "腹腔鏡陰道懸吊術", "經腹腔之骨盆底重建術", "陰道人工網膜外露修復術", "子宮懸吊術"
   ];
-  /* [商品說明] 特定傷病（二項） */
+  /* [條款] 附表二 英文名稱（與上表同順序） */
+  var SPECIFIC_SURGERIES_EN = [
+    "Abdominal perineal urethral suspension (APUS) or Vaginal perineal urethral suspension (VPUS)",
+    "Transabdominal urinary incontinence surgery", "Transvaginal urinary incontinence surgery (Kelly plication included)",
+    "Vaginal suspension", "Suspension of urinary bladder", "KELLY operation", "Artificial urinary sphincter implantation",
+    "(Retroperitoneoscopy) Laparoscopic bladder neck suspension", "Transabdominal colpopexy", "Colpopexy, vaginal approach",
+    "Laparoscopic colpopexy", "Transabdominal pelvic floor reconstruction", "Vaginal mesh extrusion repair", "Uterine suspension"
+  ];
+  /* [商品說明]／[條款] 第二條 特定傷病（二項）及定義（節錄原文） */
   var SPECIFIC_ILLNESSES = ["嚴重全身性紅斑性狼瘡腎病變", "嚴重類風濕性關節炎"];
+  var ILLNESS_DEFS = {
+    lupus: "係指一種體內出現對抗多種自體抗原的自體抗體之自體免疫性疾病合併腎病變，且經腎臟病理切片之檢查證實符合世界衛生組織 WHO 所定義的狼瘡性腎炎第三級至第六級的病理分類，合併蛋白尿。經醫院腎臟、風濕或免疫專科醫師確診者。其他類型之紅斑性狼瘡，如盤性狼瘡，或只有血液及關節病變者除外。",
+    ra: "係指經醫院風濕或免疫專科醫師診斷確定因類風濕性關節炎而導致同時符合下列兩項條件者：1.被保險人三個（含）以上之重要關節出現關節炎與關節的破壞及外觀嚴重變形，導致關節失去機能。所謂重要關節係指左右手、左右腕、左右肘、頸椎、左右膝、左右踝及左右蹠趾關節，以上關節區分左右部位，均各自視為一個重要關節。2.依巴氏量表(Barthel Index)或依其它臨床專業評量表診斷判定其造成進食、移位、如廁、沐浴、平地行動及更衣等六項目常生活自理能力存有三項（含）以上之障礙。"
+  };
+  /* [條款] 第二條 癌症（初期）、癌症（輕度）中與 CLX 圖示部位相關的項目（原文）；癌症（重度）＝初期和輕度以外之癌症 */
+  var EARLY_MILD = {
+    all:    [["初期", "原位癌或零期癌"]],
+    breast: [["輕度", "第一期乳癌"]],
+    cervix: [["輕度", "第一期子宮頸癌"]],
+    ovary:  [["輕度", "邊緣性卵巢癌"]],
+    skin:   [["初期", "第二期（含）以下且非惡性黑色素瘤之皮膚癌（包括皮膚附屬器癌及皮纖維肉瘤）"], ["輕度", "第一期黑色素瘤"]]
+  };
 
   /* 預設示範資料（畫面上可改）：民國 75/01/01 生、10 年期、100 萬、年繳、金融機構轉帳；罹癌情境第 6 保單年度 */
   var DEFAULTS = {
@@ -111,12 +131,15 @@
     firstMethod: "transfer",
     renewMethod: "transfer",
     healthCheck: false,
-    claimYear: 6        // 罹癌情境：診斷確定的保單年度（第6年度起特定癌症給付達 50%）
+    claimYear: 6,       // 罹癌情境：診斷確定的保單年度（第6年度起特定癌症給付達 50%）
+    mapTab: "cancer",   // 圖像點選：cancer 特定癌症／surgery 特定手術／illness 特定傷病（隨客戶頁連結帶出）
+    mapItem: "breast"   // 圖像點選：目前選取的部位
   };
 
   window.QUOTE_RATES = {
     RATES: RATES, PAY_MODES: PAY_MODES, PAY_METHODS: PAY_METHODS, RULES: RULES,
-    SPECIFIC_CANCERS: SPECIFIC_CANCERS, SPECIFIC_SURGERIES: SPECIFIC_SURGERIES, SPECIFIC_ILLNESSES: SPECIFIC_ILLNESSES,
+    SPECIFIC_CANCERS: SPECIFIC_CANCERS, SPECIFIC_SURGERIES: SPECIFIC_SURGERIES, SPECIFIC_SURGERIES_EN: SPECIFIC_SURGERIES_EN,
+    SPECIFIC_ILLNESSES: SPECIFIC_ILLNESSES, ILLNESS_DEFS: ILLNESS_DEFS, EARLY_MILD: EARLY_MILD,
     DEFAULTS: DEFAULTS
   };
 })();

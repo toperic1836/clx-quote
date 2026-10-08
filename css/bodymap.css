@@ -1,0 +1,146 @@
+/* 真馨相守 CLX「圖像點選」— 115/10/08 clx2：自繪 SVG 人形＋骨盆腔示意，配色沿用深藍／青綠／玫瑰 */
+.quote-wrap-2 { margin-top: 14px; padding-top: 2px; }
+.quote-wrap-2[hidden] { display: none; }
+.bm-card {
+  container-type: inline-size; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow);
+  margin: 14px 0 0; padding: 16px 16px 18px; border-top: 5px solid var(--rose);
+}
+.bm-card .sec-title { flex-wrap: wrap; }
+
+/* 分頁 */
+.bm-tabs { display: flex; gap: 6px; margin: 4px 0 12px; background: var(--rose-soft); padding: 5px; border-radius: 14px; }
+.bm-tab {
+  flex: 1 1 0; min-height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--rose-d);
+  font: inherit; font-weight: 800; font-size: 15.5px; letter-spacing: .04em; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+}
+.bm-tab:hover { background: rgba(194,71,122,.08); }
+.bm-tab.is-active { background: var(--rose); color: #fff; box-shadow: 0 4px 12px rgba(194,71,122,.3); }
+.bm-tab:focus-visible, .bm-chip:focus-visible, .bm-year:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+/* 圖區：窄版上下排；寬版人形＋放大圖並排 */
+.bm-panel { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.bm-stage { display: grid; grid-template-columns: 1fr; gap: 10px; justify-items: center; }
+.bm-fig { width: 100%; display: flex; justify-content: center; }
+.bm-fig svg { display: block; width: 100%; height: auto; }
+.bm-fig-body svg { max-width: 260px; }
+.bm-fig-front svg, .bm-fig-side svg { max-width: 400px; }
+.bm-card[data-tab="cancer"] .bm-fig-side, .bm-card[data-tab="surgery"] .bm-fig-front,
+.bm-card[data-tab="illness"] .bm-fig-front, .bm-card[data-tab="illness"] .bm-fig-side { display: none; }
+@container (min-width: 600px) {
+  .bm-stage { grid-template-columns: 250px minmax(0, 1fr); align-items: center; }
+  .bm-card[data-tab="illness"] .bm-stage { grid-template-columns: 1fr; }
+  .bm-card[data-tab="illness"] .bm-panel { grid-template-columns: 250px minmax(0, 1fr); align-items: start; }
+}
+@container (min-width: 1000px) {
+  .bm-panel { grid-template-columns: minmax(0, 660px) minmax(300px, 1fr); align-items: start; }
+}
+
+/* SVG 樣式 */
+.bm-body .fill { fill: url(#bmSkin); }
+.bm-body .limb { fill: none; stroke: #dfedf3; stroke-width: 21; stroke-linecap: round; }
+.bm-body .hair { fill: #3a587a; }
+.bm-body .contour { fill: none; stroke: #b9d0db; stroke-width: 2; stroke-linecap: round; }
+.bm-card[data-item="skin"] .bm-silhouette .fill { stroke: var(--rose); stroke-width: 1.6; stroke-dasharray: 4 4; }
+.bm-card[data-item="skin"] .bm-silhouette .limb { stroke: #f6dbe6; }
+.hs { cursor: pointer; outline: none; }
+.hs .hit, .hs .hit-stroke { fill: transparent; pointer-events: all; }
+.hs .hit-stroke { fill: none; stroke: transparent; stroke-width: 46; stroke-linecap: round; pointer-events: stroke; }
+.hs .vis { fill: #cfe3ea; stroke: var(--navy-2); stroke-width: 1.5; transition: fill .2s, stroke .2s; }
+.hs .vis.ring { fill: rgba(255,255,255,.5); stroke-dasharray: 3 3; }
+.hs .vis.box { fill: rgba(10,109,143,.06); stroke-dasharray: 5 4; }
+.hs .mini { fill: #f3c3d4; stroke: var(--rose); stroke-width: 1.2; }
+.hs .mole { fill: #6b4a3a; }
+.hs .vis.dot { fill: #fff; stroke: var(--navy-2); stroke-width: 2.5; }
+.hs .lead { stroke: #8fb1c1; stroke-width: 1.4; fill: none; }
+.hs .lbl, .bm-pelvis .lbl { font-size: 14px; font-weight: 800; fill: var(--navy); paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+.lbl.sm { font-size: 12px; font-weight: 700; fill: var(--ink-2); }
+.lbl.in { font-size: 11px; fill: #fff; stroke: none; }
+.bm-pelvis .cap { font-size: 13px; font-weight: 800; fill: var(--rose-d); letter-spacing: .06em; }
+.bm-pelvis .dir { font-size: 11.5px; font-weight: 700; fill: #94a9b4; }
+.bm-pelvis { background: linear-gradient(180deg, #fff, #fbf2f6); border-radius: 18px; border: 1px solid #f1dbe5; }
+.bm-pelvis .vis.organ { fill: #f6cddb; stroke: var(--rose); }
+.bm-pelvis .vis.organ.soft { fill: #f9dde7; }
+.bm-pelvis .vis.tube { fill: none; stroke: #e7a2bb; stroke-width: 7; stroke-linecap: round; }
+.bm-pelvis .vis.placenta { fill: #cf5f86; stroke: #9e2f5f; }
+.bm-pelvis .vis.bladder { fill: #fde6b0; stroke: #c99a2e; }
+.bm-pelvis .vis.urethra { fill: none; stroke: #e5b24c; stroke-width: 8; stroke-linecap: round; }
+.bm-pelvis .vis.vag { fill: none; stroke: #ee9fbb; stroke-width: 16; stroke-linecap: round; }
+.bm-pelvis .vis.floor { fill: none; stroke: var(--teal); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 2 5; }
+.bm-pelvis .bone { fill: none; stroke: #ece4da; stroke-width: 14; stroke-linecap: round; }
+.bm-pelvis .bone-f { fill: #ece4da; }
+.bm-pelvis .rectum { fill: none; stroke: #e4ddd6; stroke-width: 22; stroke-linecap: round; }
+/* 只顯示目前分頁的熱點 */
+.bm-card[data-tab="cancer"] .hs:not([data-tab="cancer"]),
+.bm-card[data-tab="surgery"] .hs:not([data-tab="surgery"]),
+.bm-card[data-tab="illness"] .hs:not([data-tab="illness"]) { display: none; }
+/* 滑過／鍵盤焦點／選取 */
+.hs:hover .vis, .hs:focus-visible .vis { stroke: var(--rose); stroke-width: 2.5; }
+.hs:focus-visible .hit { stroke: var(--gold); stroke-width: 3; stroke-dasharray: 5 4; }
+.hs.is-active .vis { fill: #f29bbb; stroke: var(--rose-d); stroke-width: 2.5; }
+.hs.is-active .vis.organ, .hs.is-active .vis.bladder { fill: #e9739d; }
+.hs.is-active .vis.tube, .hs.is-active .vis.urethra, .hs.is-active .vis.vag { fill: none; stroke: #d94f83; }
+.hs.is-active .vis.floor { stroke: var(--rose-d); stroke-dasharray: none; }
+.hs.is-active .vis.placenta { fill: #9e2f5f; }
+.hs.is-active .vis.box { fill: rgba(194,71,122,.12); stroke: var(--rose); }
+.hs.is-active .vis.dot { fill: var(--rose); stroke: #fff; }
+.hs.is-active .vis.ring { fill: rgba(242,155,187,.45); stroke-dasharray: none; }
+.hs.is-active .lbl { fill: var(--rose-d); }
+.hs.is-active .lead { stroke: var(--rose); stroke-width: 2; }
+@media (prefers-reduced-motion: no-preference) {
+  .hs.is-active .vis { animation: bm-pulse 1.6s ease-in-out infinite; }
+}
+@keyframes bm-pulse { 50% { opacity: .78; } }
+
+/* 部位按鈕 */
+.bm-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.bm-chip {
+  min-height: 44px; padding: 6px 14px; border-radius: 999px; border: 2px solid #ecc8d7; background: #fff; color: var(--rose-d);
+  font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.15;
+}
+.bm-chip small { font-size: 11.5px; font-weight: 600; color: var(--muted); }
+.bm-chip:hover { border-color: var(--rose); }
+.bm-chip.is-active { background: var(--rose); border-color: var(--rose); color: #fff; }
+.bm-chip.is-active small { color: #ffe3ee; }
+
+/* 明細卡 */
+.bm-detail { background: #fff; border: 2px solid #f1d3df; border-left: 8px solid var(--rose); border-radius: 16px; padding: 12px 14px 14px; scroll-margin-top: 80px; }
+.bm-d-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.bm-d-tag { font-size: 12.5px; font-weight: 800; color: #fff; background: var(--rose-d); border-radius: 999px; padding: 2px 10px; letter-spacing: .06em; }
+.bm-d-head h3 { margin: 0; font-size: 22px; color: var(--navy); }
+.bm-d-head h3 small { font-size: 13px; color: var(--muted); margin-left: 6px; font-weight: 600; }
+.bm-pay { margin: 10px 0 8px; background: linear-gradient(135deg, var(--rose-d), #7b3a78); color: #fff; border-radius: 14px; padding: 10px 14px 12px; display: flex; flex-direction: column; gap: 2px; }
+.bm-pay small { font-size: 13px; color: #ffe3ee; font-weight: 700; }
+.bm-pay b { font-size: 32px; line-height: 1.15; letter-spacing: -.3px; }
+.bm-pay span { font-size: 13px; color: #ffe9f1; font-weight: 600; }
+.bm-years { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 8px 0; }
+@container (min-width: 520px) { .bm-years { grid-template-columns: repeat(6, 1fr); } }
+.bm-year {
+  min-height: 44px; border: 1.5px solid var(--line); background: var(--tint); border-radius: 10px; padding: 4px 4px 5px; cursor: pointer; font: inherit;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.2; color: var(--navy);
+}
+.bm-year small { font-size: 11.5px; color: var(--muted); font-weight: 700; }
+.bm-year b { font-size: 13.5px; font-variant-numeric: tabular-nums; }
+.bm-year.is-active { background: var(--rose-soft); border-color: var(--rose); color: var(--rose-d); }
+.bm-detail h4 { margin: 12px 0 4px; font-size: 14px; color: var(--teal-d); letter-spacing: .06em; }
+.bm-detail p { margin: 4px 0; font-size: 14.5px; color: var(--ink-2); line-height: 1.6; }
+.bm-detail p b { color: var(--rose-d); }
+.bm-names { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.bm-names li { display: flex; gap: 8px; align-items: baseline; font-size: 15px; font-weight: 700; color: var(--navy); }
+.bm-names code { flex: none; font-family: inherit; font-size: 12px; font-weight: 800; color: #fff; background: var(--navy-2); border-radius: 6px; padding: 1px 6px; min-width: 30px; text-align: center; }
+.bm-surg li span { display: flex; flex-direction: column; }
+.bm-surg li small { font-size: 11.5px; font-weight: 400; color: var(--muted); }
+.bm-mildlist { list-style: none; margin: 4px 0 0; padding: 0; font-size: 13.5px; color: var(--ink-2); }
+.bm-mildlist li { margin: 3px 0; }
+.bm-mildlist .t { display: inline-block; font-size: 11.5px; font-weight: 800; border-radius: 6px; padding: 0 6px; margin-right: 6px; }
+.bm-mildlist .t1 { background: var(--blue-bg); color: var(--navy); }
+.bm-mildlist .t2 { background: var(--amber-bg); color: var(--amber); }
+.bm-def { font-size: 13.5px !important; background: var(--tint); border-radius: 10px; padding: 8px 10px; }
+.bm-notes { margin: 10px 0 0; padding-left: 18px; font-size: 13px; color: var(--muted); }
+.bm-notes li { margin: 2px 0; }
+.bm-notes li.flag { color: var(--amber); }
+.bm-wait { color: var(--amber) !important; font-weight: 700; }
+body.is-client .bm-card { scroll-margin-top: 10px; }
+/* 手機：特定手術分頁的人形只作位置提示，縮小以免佔版面（放大圖與按鈕皆可點選） */
+@container (max-width: 599px) {
+  .bm-card[data-tab="surgery"] .bm-fig-body svg { max-width: 160px; }
+}

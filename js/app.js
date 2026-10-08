@@ -109,6 +109,12 @@
     var waiveYears = Math.max(0, termN - cy);                   // 確診年度之後仍須繳費的年度數（至少可免繳）
     var waived = waiveYears * laterPaid;
 
+    // 第1～6保單年度確診的癌症給付（圖像點選年度按鈕用；第6年度起相同）
+    var cancerByYear = [1, 2, 3, 4, 5, 6].map(function (yy) {
+      return { year: yy, early: yy === 1 ? year1Cancer : Math.round(sa * RULES.earlyPct), severe: yy === 1 ? year1Cancer : Math.round(sa * RULES.severePct),
+        specPct: specificPct(yy), spec: Math.round(sa * specificPct(yy)) };
+    });
+
     var marks = [1, 2, 3, 4, 5, 6, 10, 15, 20, 25, 30, 40, 50, 60, 70];
     if (marks.indexOf(termN) < 0) marks.push(termN);
     var years = marks.filter(function (y) { return y < coverYears; }).concat([coverYears]).sort(function (a, b) { return a - b; });
@@ -132,7 +138,7 @@
       endAge: RULES.coverToAge, death1: deathAt(1),
       early2: Math.round(sa * RULES.earlyPct), surgery: Math.round(sa * RULES.surgeryPct), illness: Math.round(sa * RULES.illnessPct),
       specMax: Math.round(sa * RULES.specificPct[6]),
-      claimYear: cy, early: early, severe: severe, spec: spec, severeSpec: severe + spec,
+      cancerByYear: cancerByYear, claimYear: cy, early: early, severe: severe, spec: spec, severeSpec: severe + spec,
       waiveYears: waiveYears, waived: waived
     });
   }
@@ -179,6 +185,7 @@
   }
   function pct(v) { return Math.round(v * 1000) / 10 + "%"; }
 
+  var SPLIT = "<!--bodymap-->";
   function quoteHtml(c, s) {
     var yuan = function (v) { return money.format(v) + " 元"; };
     var wanY = function (v) { return wan.format(v / 1e4) + " 萬"; };
@@ -237,6 +244,7 @@
     h += brow("8", "滿期保險金（保險年齡屆滿 " + c.endAge + " 歲）", esc(yuan(c.maturity)),
       "按當年度保險金額給付後契約終止；扣除已申領之各項保險金。本商品無解約金");
     h += "</tbody></table></div></section>";
+    h += SPLIT; // 畫面上在此插入「圖像點選」區塊（PNG 不含）
 
     // ---- 罹癌情境 ----
     var y = c.claimYear;
@@ -310,7 +318,11 @@
     showText($("ageError"), c.ageError);
     showText($("amountError"), c.amountError);
 
-    $("quoteCard").innerHTML = quoteHtml(c, s);
+    var parts = quoteHtml(c, s).split(SPLIT);
+    $("quoteCard").innerHTML = parts[0];
+    $("quoteCard2").innerHTML = parts[1] || "";
+    $("quoteCard2").hidden = !parts[1];
+    if (window.BodyMap) window.BodyMap.update(c, s);
     $("sigFooter").innerHTML = footerHtml();
     if (!clientMode) saveDraft();
   }
@@ -325,6 +337,8 @@
     if (RULES.terms.indexOf(out.term) < 0) out.term = R.DEFAULTS.term;
     if (!R.PAY_METHODS.first[out.firstMethod]) out.firstMethod = R.DEFAULTS.firstMethod;
     if (!R.PAY_METHODS.renew[out.renewMethod]) out.renewMethod = R.DEFAULTS.renewMethod;
+    if (["cancer", "surgery", "illness"].indexOf(out.mapTab) < 0) out.mapTab = R.DEFAULTS.mapTab;
+    if (window.BodyMap && !window.BodyMap.isValid(out.mapTab, out.mapItem)) out.mapItem = window.BodyMap.DEFAULT_ITEM[out.mapTab];
     return out;
   }
   var saveTimer;
@@ -458,6 +472,7 @@
       state = JSON.parse(JSON.stringify(R.DEFAULTS)); render(); toast("已恢復預設");
     });
     window.addEventListener("hashchange", function () { if (/[#&]q=/.test(location.hash)) location.reload(); });
+    if (window.BodyMap) window.BodyMap.init({ root: $("bodyMap"), setState: function (o) { state = pickState(Object.assign({}, state, o)); render(); } });
     render();
   }
 

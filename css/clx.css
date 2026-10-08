@@ -1,0 +1,48 @@
+/* 真馨相守 CLX（女性專屬防癌）— 115/10/08：沿用南方 AJI／意外險版面，加玫瑰色點綴（粉紅絲帶） */
+:root { --rose: #c2477a; --rose-d: #9e2f5f; --rose-soft: #fdeef4; }
+.clx-body .hero-badge.gold { background: var(--rose); }
+.clx-body .q-hero { background: linear-gradient(135deg, var(--rose-d) 0%, #7b3a78 38%, var(--navy-2) 75%, var(--navy) 100%); }
+.q-total-sub { width: 100%; font-style: normal; font-size: 13px; color: var(--ink-2); font-weight: 600; }
+
+.q-highlights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 14px 14px 0; }
+.q-highlights > div {
+  background: #fff; border-radius: 16px; padding: 10px 12px 11px; box-shadow: 0 6px 16px rgba(11,79,122,.10);
+  border-top: 4px solid var(--navy-2); display: flex; flex-direction: column; gap: 2px; min-width: 0;
+}
+.q-highlights small { font-size: 12.5px; color: var(--muted); font-weight: 700; line-height: 1.35; }
+.q-highlights b { font-size: 26px; color: var(--navy); line-height: 1.15; letter-spacing: -.3px; }
+.q-highlights span { font-size: 12.5px; color: var(--ink-2); font-weight: 600; }
+.q-highlights .hl-main { background: linear-gradient(135deg, var(--rose-d), var(--rose)); border-top-color: var(--gold); }
+.q-highlights .hl-main small, .q-highlights .hl-main span { color: #ffe3ee; }
+.q-highlights .hl-main b { color: #fff; font-size: 30px; }
+
+.clx-body .q-ben tr.accent td { background: var(--rose-soft); }
+.clx-body .q-ben tr.accent td:not(.k) { color: var(--rose-d); }
+.clx-body .q-ben tr.accent .bn { background: var(--rose); }
+.clx-body .q-ben td:not(.k) { font-size: 16px; }
+.amt-line { display: block; white-space: nowrap; }
+.clx-body .q-frac-grid .tot { background: linear-gradient(135deg, var(--rose-d), #7b3a78); }
+.q-yr td small { display: block; font-size: 11px; color: var(--teal-d); }
+.clx-body .scenario .rule-note { margin-top: 0; }
+
+@media (min-width: 760px) {
+  .q-highlights { grid-template-columns: repeat(4, 1fr); padding: 16px 18px 0; }
+}
+@media (max-width: 759px) {
+  /* 手機：保障項目一列、金額在下一列靠右，避免說明欄被擠窄 */
+  .clx-body .q-ben thead { display: none; }
+  .clx-body .q-ben, .clx-body .q-ben tbody, .clx-body .q-ben tr, .clx-body .q-ben td { display: block; width: 100%; }
+  .clx-body .q-ben td.k { border-bottom: 0; padding-bottom: 2px; }
+  .clx-body .q-ben td:not(.k) { font-size: 15px; text-align: right; padding-top: 0; }
+  .clx-body .q-ben .amt-line { display: inline-block; }
+  .clx-body .q-ben .amt-line + .amt-line { margin-left: 14px; }
+  .q-highlights b { font-size: 22px; }
+  .q-highlights .hl-main { grid-column: 1 / -1; }
+}
+.png-root .q-highlights { grid-template-columns: repeat(4, 1fr); padding: 16px 18px 0; }
+.png-root .q-highlights .hl-main { grid-column: auto; }
+@media (max-width: 759px) {
+  /* 手機：區塊標題的小字說明換到下一行，標題本身不被擠斷 */
+  .clx-body .sec-title.big { flex-wrap: wrap; }
+  .clx-body .sec-title.big small { margin-left: 17px; width: calc(100% - 17px); }
+}

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<!-- 資產版本：更新檔案後把所有 ?v=20261008clx1 一起換新（sed -i 's/20261008clx1/新版本/g' index.html） -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#0a6d8f">
+<title>真馨相守 CLX 女性防癌保障試算｜富邦人壽 南方通訊處</title>
+<meta name="description" content="富邦人壽真馨相守防癌定期健康保險（CLX，女性專屬）保費、罹癌給付、身故與滿期保險金試算。">
+<link rel="icon" type="image/png" href="img/favicon.png?v=20261008clx1">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png?v=20261008clx1">
+<link rel="stylesheet" href="css/dm-base.css?v=20261008clx1">
+<link rel="stylesheet" href="css/accident.css?v=20261008clx1">
+<link rel="stylesheet" href="css/clx.css?v=20261008clx1">
+</head>
+<body class="acc-body clx-body">
+<header class="acc-top">
+  <div class="acc-brand">
+    <img class="acc-logo" src="img/logo-wide.png?v=20261008clx1" alt="南方 NANFANG RISE" width="104" height="44">
+    <span class="acc-brand-text">
+      <span class="acc-slogan">富邦人壽 南方通訊處</span>
+      <span class="acc-title"><b>真馨相守 CLX 女性防癌保障試算報價系統</b></span>
+    </span>
+  </div>
+  <div class="acc-actions">
+    <button type="button" class="btn btn-gold" id="btnPng">🖼 下載保障彙整圖</button>
+    <button type="button" class="btn" id="btnCopyLink" title="把客戶頁網址（試算資料全在網址內）複製下來貼到 LINE">🔗 複製客戶頁連結</button>
+    <button type="button" class="btn" id="btnOpenClient">👁 開啟客戶頁</button>
+    <button type="button" class="btn btn-ghost" id="btnReset">↺ 恢復預設</button>
+    <a class="btn btn-ghost" id="lnkTravel" href="https://toperic1836.github.io/travel-quote/editor.html">✈ 旅平險報價</a>
+    <a class="btn btn-ghost" id="lnkAccident" href="https://toperic1836.github.io/accident-quote/">🦴 意外險報價</a>
+    <a class="btn btn-ghost" id="lnkAji" href="https://toperic1836.github.io/aji-quote/">🛡 AJI 意外險報價</a>
+  </div>
+</header>
+
+<div class="acc-layout">
+  <!-- ================= 左側：輸入投保資料 ================= -->
+  <aside class="acc-input" id="inputPanel">
+    <section class="ed-card agent-card" id="agentCard">
+      <h2>👤 業務員資料 <small>填一次即可・與其他南方報價工具共用</small></h2>
+      <div class="agent-grid">
+        <label>姓名<input type="text" id="agentName" maxlength="20" placeholder="例：王小明" autocomplete="off"></label>
+        <label>職級／職稱<input type="text" id="agentTitle" maxlength="20" list="agentTitleList" placeholder="例：業務員、主任" autocomplete="off"></label>
+        <label class="agent-phone">電話（客戶可點擊撥號）<input type="tel" id="agentPhone" maxlength="24" placeholder="例：0912-345-678" autocomplete="off"></label>
+      </div>
+      <datalist id="agentTitleList"></datalist>
+      <div class="agent-foot"><span class="agent-unit">單位：富邦人壽 南方通訊處（固定，不可修改）・只存在本機瀏覽器</span><button type="button" class="btn btn-sm" id="agentSample">載入範例</button></div>
+      <p class="agent-status" id="agentStatus" role="status"></p>
+    </section>
+    <section class="ed-card">
+      <h2>被保險人 <small>右側即時更新</small></h2>
+      <div class="acc-basic">
+        <label>姓名<input type="text" id="name" autocomplete="off"></label>
+        <label>民國生日<input type="text" id="rocBirth" inputmode="numeric" placeholder="例：750101"></label>
+        <label>性別<select id="gender" disabled><option>女性（本商品限女性）</option></select></label>
+        <label>繳別<select id="payMode"></select></label>
+      </div>
+      <p class="rule-note" id="ageNote"></p>
+      <p class="field-error" id="ageError" hidden></p>
+    </section>
+
+    <!-- CLX 主約 -->
+    <section class="ed-card prod-in" style="--tone:var(--rose)">
+      <div class="prod-head"><span class="prod-code">CLX</span><strong>真馨相守防癌定期健康保險（主約）</strong></div>
+      <div class="acc-inline">
+        <label>繳費年期<select id="term"></select></label>
+        <label>保險金額
+          <span class="amount-control"><input type="number" id="amount" inputmode="numeric" min="50" max="300" step="10"><span>萬元</span></span>
+        </label>
+      </div>
+      <p class="rule-note">50～300 萬（以萬元為單位）｜10 年期 18 足歲～60 歲、20 年期 18 足歲～50 歲｜保障至保險年齡屆滿 89 歲</p>
+      <p class="field-error" id="amountError" hidden></p>
+    </section>
+
+    <!-- 繳費方式 -->
+    <section class="ed-card">
+      <h2>繳費方式 <small>符合條件享保費 1% 折扣</small></h2>
+      <div class="acc-inline">
+        <label>首期<select id="firstMethod"></select></label>
+        <label>續期<select id="renewMethod"></select></label>
+      </div>
+      <p class="rule-note">首期匯款、金融機構轉帳、富邦信用卡、續期自行繳費享 1%；一般信用卡無折扣（主約折扣上限 1%）</p>
+      <label class="check"><input type="checkbox" id="healthCheck"> 顯示「健康管理保險費折扣」1%（第2保單年度起續期，需於指定期間送健檢報告）</label>
+    </section>
+
+    <!-- 罹癌情境 -->
+    <section class="ed-card scenario">
+      <h2>罹癌情境 <small>首次診斷確定的保單年度</small></h2>
+      <label>第幾保單年度確診
+        <span class="amount-control"><input type="number" id="claimYear" inputmode="numeric" min="1" step="1"><span>年度</span></span>
+      </label>
+      <p class="rule-note">第1年度：初期／輕度、重度皆按年繳保費總和 × 1.06；第2年度起按保險金額比例；特定癌症（重度）第2年度 10% 逐年增至第6年度起 50%。</p>
+    </section>
+    <p class="build-ver">南方通訊處版 115/10/08・CLX 依官方費率表／投保規則／保費規定／商品說明／條款／建議書 xlsx</p>
+  </aside>
+
+  <!-- ================= 右側：保障彙整（客戶頁同內容） ================= -->
+  <main class="acc-summary" id="summaryPanel">
+    <div id="quoteCard" class="quote-wrap" aria-live="polite"></div>
+    <footer class="site-footer" id="sigFooter"></footer>
+  </main>
+</div>
+
+<script src="js/vendor/html2canvas.min.js?v=20261008clx1"></script>
+<script src="js/agent-profile.js?v=20261008clx1"></script>
+<script src="js/rates.js?v=20261008clx1"></script>
+<script src="js/app.js?v=20261008clx1"></script>
+</body>
+</html>
